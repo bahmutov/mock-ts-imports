@@ -1,5 +1,5 @@
-// "compute" imports "add" from "./math" using named import
 import test, { beforeEach } from 'ava'
+// "compute" imports "add" from "./math" using named import
 import { compute } from './user'
 import { ImportMock } from 'ts-mock-imports'
 // to mock "./math add" export need to import entire module
@@ -20,4 +20,13 @@ test('stubbed add', t => {
 
 test('add stays stubbed', t => {
   t.deepEqual(compute(-1, 7), 6)
+})
+
+test('stub and restore', t => {
+  const stub = ImportMock.mockFunction(math, 'add', 100)
+  t.deepEqual(compute(2, 3), 100)
+  stub.returns(42)
+  t.deepEqual(compute(2, 3), 42)
+  stub.restore()
+  t.deepEqual(compute(2, 3), 5)
 })

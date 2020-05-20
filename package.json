@@ -1,7 +1,7 @@
 {
   "name": "mock-ts-imports",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mocking named imports in unit tests",
   "main": "index.js",
   "scripts": {
     "test": "ava-ts *spec.ts"
